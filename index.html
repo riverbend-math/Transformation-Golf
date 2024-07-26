@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Transformation Golf</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://riverbendmath.org/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="index.css" type="text/css" />
+    <script type="text/javascript" src="./modules/math_supplement.js"></script>
+    <script type="text/javascript" src="./modules/reals.js"></script>
+    <script type="text/javascript" src="./modules/coords.js"></script>
+    <script type="text/javascript" src="./modules/TG_level_settings.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <div id="TGolf">
+      <span class="message">Transformation Golf: get the <span class="ball">ball</span> 
+        in the <span class="cup">cup</span> in fewest moves.</span>
+      <h3 id="level-heading" type="text"></h3>
+        <div id="next-game-block" class="invisible">
+          <button id="repeat-level">Repeat Level</button>
+          <button id="next-level">Next Level</button>
+          <span id="course-completed" class="message"></span>
+        </div>
+      <div class="row">
+        <div class="column left">
+        
+          <div id="controls-block" class="invisible">
+            <h3><span class="ball">Ball</span>  controls</h3>
+            <div id="shift_x" class="control hide">
+              Shift <i>x</i> by
+              <input id="x" type="text"  size="5"></input>
+            </div>
+            <div id="shift_y" class="control hide">
+              Shift <i>y</i> by 
+              <input id="y" type="text"  size="5"></input>
+            </div>
+
+            <div id="flip_x" class="control hide">
+              Flip over line <i>x = </i> <input id="x_0" type="text"  size="4"></input>
+            </div>
+            
+            <div id="rotate" class="control hide">Rotate around
+              (<input id="rx" type="text"  size="4"></input>,
+               <input id="ry" type="text"  size="4")></input>)
+               by angle 
+              <input id="angle" type="text"  size="4"></input>
+            </div>
+
+            <div id="flip_y" class="control hide">
+              Flip over line <i>y =</i> <input id="m" type="text"  size="4"></input>
+              &#x00D7 <i>x + </i> <input id="b" type="text"  size="4"></input>
+            </div>
+
+            <div>
+              <button id="transform">Move <span class="ball">ball</span> </button>
+            </div>
+            
+            <div id="bring-back?" class="hide">
+              <p>
+                Bring <span class="ball">ball</span> back to start? 
+                <button id="bring-back">Bring <span class="ball">ball</span> back</button>
+              </p>
+            </div>
+            
+          </div>
+          <h2>Game info</h2>
+          <div id="game-info-block" class="invisible">
+            <p>Moves made: <span id="num-strokes" class="stats"></span></p>
+            <p><span class="ball">Ball</span> : <span id="ball-vertices" class="stats ball"></span></p>
+            <p><span class="cup">Cup</span> : <span id="cup-vertices" class="stats cup"></span></p>
+            <p><span id="last-move" class="message"></span></p>
+          </div>
+        </div>
+        <div class="column middle">
+          <canvas id="canvas" width="500" height="500">
+            Your browser doesn't support JavaScript canvas.
+          </canvas>
+        </div>
+        <div class="column right">
+          <p><b>Level : score</b></p>
+          <span id="level-scores"></span>
+          <p>
+            <button id="skip">Skip to level:</button>
+            <input id="skip-level" type="text" size="2"></input>
+          </p>
+        </div>
+        
+
+      </div>
+    </div>
+ 
+  </body>
+</html>
+
+
+

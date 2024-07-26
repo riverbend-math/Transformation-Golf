@@ -1,0 +1,59 @@
+#TGolf{
+    margin: 2em 5em 5em 5em;
+}
+
+.padded{
+    margin: 0em 0em 1em 0em;
+}
+
+.hide {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.column {
+    float: left;
+}
+
+.left {
+    width: 40%;
+}
+
+.middle {
+    width: 50%;
+}
+
+.right {
+    width: 10%;
+}
+
+.bad_input {
+    border: 2px solid red;
+}
+
+.message {
+    font-weight: normal;
+    color: black;
+}
+
+.stats {
+    font-weight: bold;
+}
+
+.ball {
+    color: red;
+}
+
+.cup {
+    color: blue;
+}
+
+.control {
+    margin: 1em 0em 1em 0em;
+}
+
+
+
