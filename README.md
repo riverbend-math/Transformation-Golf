@@ -7,3 +7,11 @@ An educational game for exploring the effects of translations, rotations and ref
 8.GM.1 Explore dilations, translations, rotations, and reflections on two-dimensional figures in the coordinate plane. 
 
 G.TS.1 Use geometric descriptions of rigid motions to transform figures and to predict and describe the results of translations, reflections and rotations on a given figure. Describe a motion or a series of motions that will show two shapes are congruent. 
+
+# Source URL
+
+https://github.com/riverbend-math/Transformation-Golf
+
+# LICENCE
+
+Placed into the public domain (CC0) by the Riverbend Community Math Center
