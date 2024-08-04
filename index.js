@@ -75,6 +75,8 @@ class RightTriangle {
 }
 
 class TGolf {
+    #num_strokes;
+    #level_scores;
 
     transform() {
         this.last_move = "Last move:\n";
@@ -218,14 +220,15 @@ class TGolf {
         this.ball.draw();
 
         // update stats
-        this.num_strokes += 1;
+        this.#num_strokes += 1;
+        this.num_strokes_since_reset += 1;
         this.update_game_info()
 
         if (this.ball.covers(this.cup)) {
             this.end_course()
         }
 
-        if (this.ball_out_of_bounds()) {
+        if (this.ball_reset_allowed()) {
             this.bring_back_block.classList.remove("hide");
         } else {
             this.bring_back_block.classList.add("hide");
@@ -233,19 +236,19 @@ class TGolf {
     }
 
     end_course() {
-        if (this.level_scores[this.level] === null) {
-            this.level_scores[this.level] = this.num_strokes;
-        } else if (this.level_scores[this.level] > this.num_strokes) {
-            this.level_scores[this.level] = this.num_strokes;
+        if (this.#level_scores[this.level] === null) {
+            this.#level_scores[this.level] = this.#num_strokes;
+        } else if (this.#level_scores[this.level] > this.#num_strokes) {
+            this.#level_scores[this.level] = this.#num_strokes;
         }
         let s = "";
         let score;
         let completed = 0;
-        for (let i = 1; i < this.level_scores.length; i++) {
-            if (this.level_scores[i] === null) {
+        for (let i = 1; i < this.#level_scores.length; i++) {
+            if (this.#level_scores[i] === null) {
                 score = '__';
             } else {
-                score = this.level_scores[i];
+                score = this.#level_scores[i];
                 completed += 1;
             }
             s += `${i}: ${score}\n`;
@@ -265,13 +268,16 @@ class TGolf {
     }
 
     update_game_info() {
-        this.strokes_message.innerText = this.num_strokes;
+        this.strokes_message.innerText = this.#num_strokes;
         this.ball_message.innerText = this.ball.toString();
         this.cup_message.innerText = this.cup.toString();
         this.last_move_message.innerText = this.last_move;
     }
 
-    ball_out_of_bounds() {
+    ball_reset_allowed() {
+        if (this.num_strokes_since_reset >= 5) {
+            return true;
+        }
         let pos = this.ball.pos;
         let crd = this.settings.coords;
         if (pos[0].x < crd.x_min && pos[1].x < crd.x_min && pos[2].x < crd.x_min ) {
@@ -290,11 +296,12 @@ class TGolf {
     }
 
     bring_ball_back() {
+        this.num_strokes_since_reset = 0;
         this.create_ball(this.settings.leg_length, this.settings.ball_transformation);
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.putImageData(this.course_image, 0, 0);
         this.ball.draw();
-        this.num_strokes += 1;
+        this.#num_strokes += 1;
         this.update_game_info();
         this.bring_back_block.classList.add("hide");
     }
@@ -437,7 +444,8 @@ class TGolf {
         this.create_cup(this.settings.leg_length, this.settings.cup_transformation);
         this.course_image = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
         this.create_ball(this.settings.leg_length, this.settings.ball_transformation);
-        this.num_strokes = 0;
+        this.#num_strokes = 0;
+        this.num_strokes_since_reset = 0;
         this.last_move = "";
         this.update_game_info();
     }
@@ -493,14 +501,14 @@ class TGolf {
         this.skip_button.addEventListener("click", () => this.skip_to_level());
         // level scores
         this.level_scores_message = document.getElementById("level-scores");
-        this.level_scores = [null];
+        this.#level_scores = [null];
         this.max_levels = 18;
         for (let n = 1; n <= this.max_levels; n++) {
-            this.level_scores.push(null);
+            this.#level_scores.push(null);
         }
         let s = "";
-        for (let i = 1; i < this.level_scores.length; i++) {
-            let score = (this.level_scores[i] === null) ? '__' : this.level_scores[i];
+        for (let i = 1; i < this.#level_scores.length; i++) {
+            let score = (this.#level_scores[i] === null) ? '__' : this.#level_scores[i];
             s += `${i} : ${score}\n`;
         }
         this.level_scores_message.innerText = s;
